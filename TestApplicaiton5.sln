@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplicaiton5", "TestApplicaiton5\TestApplicaiton5.csproj", "{0E104DF1-E4D4-419B-9BA6-CB2B2EFDF9C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85FC0792-6A74-4B49-A9C9-1C568B092FE9}"
+	ProjectSection(SolutionItems) = preProject
+		Log List.txt = Log List.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
