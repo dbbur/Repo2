@@ -10,7 +10,8 @@ namespace TestApplicaiton5
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("yup");
+            Console.ReadLine();
 
         }
     }
