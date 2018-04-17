@@ -1,14 +1,15 @@
 ﻿/*
  * Doesn't need to be in this class if it makes sense to be elsewhere, just creating a placeholder class.
  * 
- * -Display and confirm if the answer was correct to the user
--Display total score after selected game length is completed.
--Randomly generate questions
+ * -(done)Display and confirm if the answer was correct to the user
+- Displays total score after selected game length is completed.
+- (done)Randomly generate questions/inquiry objects
 
  * 
  * TODO: (GetInquiryList) Need to create more Inquiry variables for the array.
- *          (GetInquiryList) Need to only return number of variables in list as are specified in the parameter.
- *          (GetInquiryList) Need add restrict list of of Inquiries based on Category
+ * Displays total score after selected game length is completed.
+ *       
+ *          
  * 
  */
 
@@ -34,30 +35,74 @@ namespace TestApplicaiton5
         /*Takes a int parameter for the number of questions and string for the category then returns that number of questions for that category in an List<Inquiry>.  */
         public static List<Inquiry> GetInquiryList(int inqCount, string inqCategory)
         {
-            //Initilizes a list of Inquiry variables while building the array
-            List<Inquiry> inquiryList = new List<Inquiry>()
+            Random rng = new Random();
+            //Creates a list variable to recieve in the List of Inquiry that will be returned back from the InitializeInquiryList method call.  Method is static so an instance of the class isn't needed.
+            List<Inquiry> inquiryList = InitializeInquiryList();
+
+
+            //Leveraging the Linq query syntax to only pull certain Inquiry records out of the List
+            var varSpecifiedInquires = from Inquiry in inquiryList
+                                       where Inquiry.Category == inqCategory
+                                       select Inquiry;
+
+
+            return varSpecifiedInquires.Take(inqCount).OrderBy(a => rng.Next()).ToList();  //Takes only a certain number of items from the List, then orders it by a random count, and then casts the var back into a List of Inquiry type
+            
+        }
+
+
+        /*Recieves the Inquiry KeyId (string) and the answer (string) provided by the user then returns a boolean if it's the correct answer*/
+        public static bool ConfirmInquiryAnswer(string inqKey, string userAnswer)
+        {
+            List<Inquiry> inquiryList = InitializeInquiryList();
+            List<Inquiry> iList = (from Inquiry in inquiryList
+                                       where Inquiry.KeyId == inqKey
+                                       select Inquiry).ToList();
+
+
+            //Compares the user Answer with the Inquiry to confirm if it matches
+            if (iList.Count != 0)
             {
-                new Inquiry {Question = "Which actor stars in the movie Beetleguise?", Answer = "Michael Keaton", Category = "Movie", MultiChoice1 = "Michael Keaton", MultiChoice2 = "Danny DeVito", MultiChoice3 = "David Cross" },
-                new Inquiry {Question = "What year was the Matrix released?", Answer = "1999", Category = "Movie", MultiChoice1 = "1999", MultiChoice2 = "1995", MultiChoice3 = "1997" }
+                if (userAnswer == "1")
+                {
+                    if (iList[0].MultiChoice1 == iList[0].Answer)
+                        return true;
+                }
+                else if (userAnswer == "2")
+                {
+                    if (iList[0].MultiChoice2 == iList[0].Answer)
+                        return true;
+                }
+                else if (userAnswer == "3")
+                {
+                    if (iList[0].MultiChoice3 == iList[0].Answer)
+                        return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
+
+            return false; //if for some reason we get to this point without already returning a result...
+        }
+
+
+        /*Initilizes a list of Inquiry variables and returns it as a List array  */
+        private static List<Inquiry> InitializeInquiryList()
+        {
+            //Populates the List and then returns it.
+            return new List<Inquiry>()
+            {
+                new Inquiry {KeyId = "1", Question = "Which actor stars in the movie Beetleguise?", Answer = "Michael Keaton", Category = "Movie", MultiChoice1 = "Michael Keaton", MultiChoice2 = "Danny DeVito", MultiChoice3 = "David Cross" },
+                new Inquiry {KeyId = "2", Question = "What year was the Matrix released?", Answer = "1999", Category = "Movie", MultiChoice1 = "1999", MultiChoice2 = "1995", MultiChoice3 = "1997" },
+                new Inquiry {KeyId = "3", Question = "Which games series is owned by Nintendo?", Answer = "Zelda", Category = "Game", MultiChoice1 = "Zelda", MultiChoice2 = "Final Fantasy", MultiChoice3 = "Bioshock" },
+                new Inquiry {KeyId = "4", Question = "What is the largest city in Oregon?", Answer = "Portland", Category = "Other", MultiChoice1 = "Portland", MultiChoice2 = "Salem", MultiChoice3 = "Eugene" }
             };
 
 
-            var varSpecifiedInquires = from Inquiry in inquiryList
-                                       where Inquiry.Category == "Movie"
-                                       select Inquiry;
+        }
 
-            //Console.WriteLine(varSpecifiedInquires.ToList());
-            //Console.Write(inquiryList);
-
-            /*
-            foreach (Inquiry i in inquiryList)
-                Console.WriteLine(i.Question);
-           
-            Console.Read();
-            */
-
-            return inquiryList;
-        } 
 
 
     }

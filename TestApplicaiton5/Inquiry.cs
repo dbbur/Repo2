@@ -28,6 +28,7 @@ namespace TestApplicaiton5
     class Inquiry
     {
         //List of properties
+        public string KeyId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
         public string Category { get; set; }
@@ -42,8 +43,9 @@ namespace TestApplicaiton5
         }
 
         //Constructor method with input parameters
-        public Inquiry (string question, string answer, string category, string multiChoice1, string multiChoice2, string multiChoice3)
+        public Inquiry (string keyid, string question, string answer, string category, string multiChoice1, string multiChoice2, string multiChoice3)
         {
+            this.KeyId = keyid;
             this.Question = question;
             this.Answer = answer;
             this.Category = category;

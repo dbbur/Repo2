@@ -34,8 +34,8 @@ namespace TestApplicaiton5
 
 
 
+            
             /*
-
 
             //Adding menus to make calls out to a particular classes/methods so those can be tested individually without needing all Classes/methods to run.
 
@@ -46,7 +46,7 @@ namespace TestApplicaiton5
             if (userInput == "1")
             {
                 List<Inquiry> iList = new List<Inquiry>();
-                iList = GameObject.GetInquiryList(1, "Movie");
+                iList = GameObject.GetInquiryList(2, "Movie");
             }
             else if (userInput == "2")
             {
@@ -61,6 +61,9 @@ namespace TestApplicaiton5
 
 
             */
+
+
+            
 
 
         }
