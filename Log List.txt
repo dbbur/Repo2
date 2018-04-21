@@ -1,3 +1,4 @@
 Test log file:
 
-Test1
+Areas of Improvement:
+- Review distinction of static methods/variables in Classes context when accessing them as an instance or as an object reference.
