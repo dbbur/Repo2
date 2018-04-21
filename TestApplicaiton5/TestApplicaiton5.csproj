@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debug.cs" />
     <Compile Include="DisplayController.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Inquiry.cs" />

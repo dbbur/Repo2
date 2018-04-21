@@ -2,12 +2,12 @@
  * Doesn't need to be in this class if it makes sense to be elsewhere, just creating a placeholder class.
  * 
  * -(done)Display and confirm if the answer was correct to the user
-- Displays total score after selected game length is completed.
+- (done) Displays total score after selected game length is completed.
 - (done)Randomly generate questions/inquiry objects
 
  * 
  * TODO: (GetInquiryList) Need to create more Inquiry variables for the array.
- * Displays total score after selected game length is completed.
+ * Need to change IncrementPlayerScore back to private, public for debuging class call.
  *       
  *          
  * 
@@ -32,6 +32,10 @@ namespace TestApplicaiton5
 {
     class GameObject
     {
+        //private static int playerscore = 0; //Initializes player score local varable for use in the property.
+        public int playerScore { get; set; } //Initializes player score property.
+        
+
         /*Takes a int parameter for the number of questions and string for the category then returns that number of questions for that category in an List<Inquiry>.  */
         public static List<Inquiry> GetInquiryList(int inqCount, string inqCategory)
         {
@@ -52,7 +56,7 @@ namespace TestApplicaiton5
 
 
         /*Recieves the Inquiry KeyId (string) and the answer (string) provided by the user then returns a boolean if it's the correct answer*/
-        public static bool ConfirmInquiryAnswer(string inqKey, string userAnswer)
+        public bool ConfirmInquiryAnswer(string inqKey, string userAnswer)
         {
             List<Inquiry> inquiryList = InitializeInquiryList();
             List<Inquiry> iList = (from Inquiry in inquiryList
@@ -66,17 +70,26 @@ namespace TestApplicaiton5
                 if (userAnswer == "1")
                 {
                     if (iList[0].MultiChoice1 == iList[0].Answer)
+                    {
+                        IncrementPlayerScore();
                         return true;
+                    }
                 }
                 else if (userAnswer == "2")
                 {
                     if (iList[0].MultiChoice2 == iList[0].Answer)
+                    {
+                        IncrementPlayerScore();
                         return true;
+                    }
                 }
                 else if (userAnswer == "3")
                 {
                     if (iList[0].MultiChoice3 == iList[0].Answer)
+                    {
+                        IncrementPlayerScore();
                         return true;
+                    }
                 }
                 else
                     return false;
@@ -85,6 +98,13 @@ namespace TestApplicaiton5
                 return false;
 
             return false; //if for some reason we get to this point without already returning a result...
+        }
+
+
+        /*Increments the player's score. */
+        public void IncrementPlayerScore()
+        {
+            playerScore++;
         }
 
 
